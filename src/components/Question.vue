@@ -39,7 +39,10 @@ export default {
     form: {
       r: []
     }
-  })
+  }),
+  created: function () {
+    
+  }
 }
 </script>
 

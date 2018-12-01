@@ -1,11 +1,14 @@
 <template>
   <div>
-    <question :data="questionObj" />
+    <div :key="element.id" v-for="element in data">
+      <question :data="element" />
+    </div>
   </div>
 </template>
 
 <script>
 import Question from '@/components/Question'
+import { api } from '@/api'
 
 export default {
   name: 'Questions',
@@ -13,51 +16,29 @@ export default {
     'question': Question
   },
   data: () => ({
-    questionObj: {
-      questionText: 'Age de l\'enfant ?',
-      answers: [
-        {
-          id: 1,
-          type: 'checkbox',
-          label: 'check me',
-          out: {
-            checked: false,
-            input: ''
-          }
-        },
-        {
-          id: 2,
-          type: 'checkbox',
-          label: 'check me',
-          out: {
-            checked: false,
-            input: ''
-          }
-        },
-        {
-          id: 3,
-          type: 'input',
-          label: 'fill me',
-          placeholder: 'please',
-          out: {
-            checked: false,
-            input: ''
-          }
-        },
-        {
-          id: 4,
-          type: 'input',
-          label: 'fill me',
-          placeholder: 'please',
-          out: {
-            checked: false,
-            input: 'azerty'
-          }
-        }]
-    }
+    data: []
   }),
   created: function () {
-
+    var answers = []
+    api.getQuestions(1).then(res => {
+      res.data.results
+      res.data.results.forEach(rootElement => {
+        rootElement.answers.forEach(element => {
+          answers = []
+          var obj = element
+          obj.out = {}
+          obj.out.checked = false
+          obj.out.input = ''
+          answers.push(obj)
+        })
+        var objRoot = rootElement
+        objRoot.answers = answers
+        this.data.push(objRoot)
+      });
+      console.log(this.data)
+    }).catch(err => {
+      console.log(err)
+    })
   },
   methods: {
 
