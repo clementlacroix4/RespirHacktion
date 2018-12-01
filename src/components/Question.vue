@@ -7,7 +7,7 @@
             <label>Question:</label>
           </b-col>
           <b-col lg="10">
-            <h4>{{ data.questionText }}</h4>
+            <h4 style="text-align: initial;">{{ data.questionText }}</h4>
           </b-col>
         </b-row>
       </div>
