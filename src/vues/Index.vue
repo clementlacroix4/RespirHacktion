@@ -6,9 +6,7 @@
 <script>
 export default {
   name: 'Index',
-  data () {
-    return {
-    }
-  }
+  data: () => ({
+  })
 }
 </script>
