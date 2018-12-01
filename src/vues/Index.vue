@@ -25,10 +25,6 @@ export default {
     'register': Register,
     'login': Login
   },
-  data () {
-    return {
-    }
-  },
   methods: {
     showLogin () {
       this.$refs.modalLogin.show()
